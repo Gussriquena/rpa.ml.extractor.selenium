@@ -25,4 +25,10 @@ public class MercadoLivrePage extends PageObjects {
 	public MercadoLivrePage(WebDriver driver) {
 		super(driver);
 	}
+	
+	public void getProductsUrl() {
+		
+		//driver.findElements(productsLinks.getAttribute("href").get);
+		//return productsLinks.getAttribute("href");
+	}
 }
