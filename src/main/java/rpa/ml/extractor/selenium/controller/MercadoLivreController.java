@@ -56,14 +56,18 @@ public class MercadoLivreController {
 		List<ProductOutput> productOutput = new ArrayList<>();
 		 
 		for (String product : productUrl) {
-			driver.get(product);
-			String productPrice = driver.findElement(By.xpath(PageEnum.XPATH_PRODUCT_PAGE_PRICE.getValue())).getText();
-			String productSalesAmount = driver.findElement(By.xpath(PageEnum.XPATH_PRODUCT_PAGE_AMOUNT.getValue())).getText();
-			String productName = driver.findElement(By.xpath(PageEnum.XPATH_PRODUCT_PAGE_NAME.getValue())).getText();
-			
-			if(productSalesAmount.contains("vendido") || productSalesAmount.contains("vendidos")) {
-				log.info(productName + " - " + productPrice + " - " + productSalesAmount);
-				productOutput.add(new ProductOutput(productName, new BigDecimal(productPrice), Integer.parseInt(productSalesAmount.replaceAll("\\D", ""))));
+			try {
+				driver.get(product);
+				String productPrice = driver.findElement(By.xpath(PageEnum.XPATH_PRODUCT_PAGE_PRICE.getValue())).getText();
+				String productSalesAmount = driver.findElement(By.xpath(PageEnum.XPATH_PRODUCT_PAGE_AMOUNT.getValue())).getText();
+				String productName = driver.findElement(By.xpath(PageEnum.XPATH_PRODUCT_PAGE_NAME.getValue())).getText();
+				
+				if(productSalesAmount.contains("vendido") || productSalesAmount.contains("vendidos")) {
+					log.info(productName + " - " + productPrice + " - " + productSalesAmount);
+					productOutput.add(new ProductOutput(productName, new BigDecimal(productPrice), Integer.parseInt(productSalesAmount.replaceAll("\\D", ""))));
+				}
+			} catch (Exception e) {
+				log.error(e.getMessage());
 			}
 		}
 		

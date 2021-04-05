@@ -14,7 +14,6 @@ public class WebDriverFactory {
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
 		return driver;
 	}
 
